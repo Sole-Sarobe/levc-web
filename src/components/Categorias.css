@@ -171,3 +171,35 @@
   }
 
 }
+.electricidad {
+  position: relative;
+
+  background-image:
+    url("../assets/categoria-electricidad.jpg");
+
+  background-size: cover;
+  background-position: center;
+
+  overflow: hidden;
+}
+
+.electricidad::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(18, 39, 120, 0.88) 0%,
+      rgba(18, 39, 120, 0.72) 35%,
+      rgba(18, 39, 120, 0.28) 60%,
+      rgba(18, 39, 120, 0) 100%
+    );
+
+  z-index: 1;
+}
+.categoria-info {
+  z-index: 5;
+}
