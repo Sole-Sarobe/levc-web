@@ -157,19 +157,35 @@
 /* Mobile */
 @media (max-width: 768px) {
 
-  .ultimos-grid {
-    flex-direction: column;
+  .cards-grid {
+    display: flex !important;
+    flex-direction: column !important;
     align-items: center;
+    gap: 24px;
   }
 
-  .ingreso-card {
-    width: 90%;
-    max-width: 380px;
-    height: 500px;
+  .producto-card {
+    width: 100% !important;
+    max-width: 340px !important;
+    height: 420px !important;
+    min-height: unset !important;
   }
 
-  .ingreso-card h3 {
-    font-size: 42px;
+  .producto-info {
+    left: 22px;
+    bottom: 22px;
+    width: auto;
+  }
+
+  .producto-info h3 {
+    font-size: 28px;
+    line-height: 1;
+    max-width: 180px;
+  }
+
+  .producto-info p {
+    font-size: 14px;
+    max-width: 180px;
   }
 
 }
