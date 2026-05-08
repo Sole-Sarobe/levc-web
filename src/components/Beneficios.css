@@ -40,3 +40,18 @@
   color: #555;
   line-height: 1.5;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .beneficios {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .beneficio {
+    width: 90%;
+    max-width: 350px;
+  }
+
+}

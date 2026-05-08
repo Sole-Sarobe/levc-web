@@ -113,3 +113,36 @@
 
   background: #2147e8;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .hero {
+    height: auto;
+    min-height: 700px;
+  }
+
+  .hero-overlay {
+    padding: 120px 25px 80px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .hero-title {
+    font-size: 58px;
+    line-height: 0.95;
+  }
+
+  .hero-description {
+    font-size: 20px;
+    max-width: 100%;
+  }
+
+  .hero-button {
+    width: 100%;
+    max-width: 320px;
+  }
+
+}

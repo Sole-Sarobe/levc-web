@@ -50,3 +50,18 @@
     transform: translateX(-50%);
   }
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .marcas-track {
+    gap: 20px;
+  }
+
+  .marca-item {
+    min-width: 220px;
+    height: 110px;
+    font-size: 42px;
+  }
+
+}

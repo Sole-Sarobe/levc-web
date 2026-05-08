@@ -153,3 +153,23 @@
 .producto-info button:hover {
   background: #2147e8;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .ultimos-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ingreso-card {
+    width: 90%;
+    max-width: 380px;
+    height: 500px;
+  }
+
+  .ingreso-card h3 {
+    font-size: 42px;
+  }
+
+}

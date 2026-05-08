@@ -41,3 +41,35 @@
 
   font-weight: bold;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .header {
+    padding: 18px 20px;
+  }
+
+  .header-container {
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .nav {
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav a {
+    font-size: 16px;
+  }
+
+  .logo {
+    width: 70px;
+  }
+
+  .whatsapp-btn {
+    display: none;
+  }
+
+}
