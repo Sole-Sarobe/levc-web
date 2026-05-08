@@ -48,7 +48,7 @@
 
 .herramientas {
   background-image:
-    url("./assets/hero-logistica.jpg");
+    url("../assets/categoria-herramientas.jpg");
 }
 
 .pinturas {
@@ -171,35 +171,43 @@
   }
 
 }
-.electricidad {
-  position: relative;
+/* ELECTRICIDAD */
 
-  background-image:
-    url("../assets/categoria-electricidad.jpg");
-
-  background-size: cover;
-  background-position: center;
-
-  overflow: hidden;
-}
-
-.electricidad::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
+.electricidad .categoria-overlay {
   background:
     linear-gradient(
-      90deg,
-      rgba(18, 39, 120, 0.88) 0%,
-      rgba(18, 39, 120, 0.72) 35%,
-      rgba(18, 39, 120, 0.28) 60%,
-      rgba(18, 39, 120, 0) 100%
+      to right,
+      rgba(18,39,120,0.88) 0%,
+      rgba(18,39,120,0.72) 35%,
+      rgba(18,39,120,0.28) 60%,
+      rgba(18,39,120,0) 100%
     );
-
-  z-index: 1;
 }
-.categoria-info {
-  z-index: 5;
+
+/* HERRAMIENTAS */
+
+.herramientas .categoria-overlay {
+  background:
+    linear-gradient(
+      to right,
+      rgba(20,20,20,0.82) 0%,
+      rgba(20,20,20,0.68) 28%,
+      rgba(20,20,20,0.28) 55%,
+      rgba(20,20,20,0.08) 78%,
+      rgba(20,20,20,0) 100%
+    );
+}
+
+/* PINTURAS */
+
+.pinturas .categoria-overlay {
+  background:
+    linear-gradient(
+      to right,
+      rgba(120,20,40,0.82) 0%,
+      rgba(120,20,40,0.60) 25%,
+      rgba(120,20,40,0.22) 50%,
+      rgba(0,0,0,0.10) 75%,
+      rgba(0,0,0,0.28) 100%
+    );
 }
