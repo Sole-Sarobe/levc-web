@@ -118,17 +118,20 @@
 @media (max-width: 768px) {
 
   .hero {
-    height: 820px;
+    min-height: 620px;
+    height: 620px;
+  }
+
+  .hero img {
+    object-position: center;
   }
 
   .overlay {
     background: linear-gradient(
       to top,
-      rgba(255,255,255,0.92) 0%,
-      rgba(255,255,255,0.82) 28%,
-      rgba(255,255,255,0.45) 55%,
-      rgba(255,255,255,0.08) 80%,
-      rgba(255,255,255,0) 100%
+      rgba(255,255,255,0.96),
+      rgba(255,255,255,0.82),
+      rgba(255,255,255,0.45)
     );
   }
 
@@ -139,7 +142,7 @@
     right: 20px;
 
     top: auto;
-    bottom: 60px;
+    bottom: 50px;
 
     transform: none;
 
@@ -152,34 +155,36 @@
   }
 
   .hero-content h1.large {
-    font-size: 54px;
-    line-height: 0.92;
+    font-size: 52px;
+
+    line-height: 0.95;
+
     letter-spacing: -2px;
+
+    margin-bottom: 18px;
   }
 
   .hero-content h1.medium {
     font-size: 42px;
-    line-height: 0.95;
-    letter-spacing: -2px;
+
+    line-height: 1;
   }
 
   .hero-description {
-    font-size: 17px;
-    line-height: 1.5;
+    font-size: 18px;
+
+    line-height: 1.45;
 
     max-width: 100%;
-
-    margin-bottom: 26px;
   }
 
   .hero-content button {
     width: 100%;
-
     max-width: 320px;
 
-    padding: 18px 24px;
+    height: 56px;
 
-    font-size: 17px;
+    padding: 0;
   }
 
 }
