@@ -1,0 +1,43 @@
+.header {
+  height: 90px;
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 60px;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 1000;
+}
+
+.logo-container img {
+  height: 85px;
+}
+
+.nav {
+  display: flex;
+  gap: 35px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+}
+
+.whatsapp-btn {
+  background: white;
+  border: 2px solid #2d5cff;
+
+  padding: 12px 22px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+}

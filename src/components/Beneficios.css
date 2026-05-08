@@ -1,0 +1,42 @@
+/* ------------------------------BENEFICIOS-------------------- */
+
+.beneficios {
+  width: 90%;
+  margin: 80px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.beneficio {
+  background: white;
+  border-radius: 24px;
+  padding: 30px 25px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  transition: 0.3s;
+}
+
+
+.beneficio:hover {
+  transform: translateY(-8px);
+}
+
+.beneficio-icon {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.beneficio h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.beneficio p {
+  font-size: 17px;
+  color: #555;
+  line-height: 1.5;
+}
