@@ -45,13 +45,34 @@
 @media (max-width: 768px) {
 
   .beneficios {
-    flex-direction: column;
-    align-items: center;
+    width: calc(100% - 40px);
+
+    margin: 60px auto;
+
+    grid-template-columns: 1fr;
+
+    gap: 22px;
   }
 
   .beneficio {
-    width: 90%;
-    max-width: 350px;
+    padding: 28px 22px;
+
+    border-radius: 22px;
+  }
+
+  .beneficio-icon {
+    width: 78px;
+    height: 78px;
+  }
+
+  .beneficio h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .beneficio p {
+    font-size: 15px;
+    line-height: 1.5;
   }
 
 }

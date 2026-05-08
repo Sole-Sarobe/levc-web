@@ -107,22 +107,62 @@
 /* Mobile */
 @media (max-width: 768px) {
 
-  .footer-top {
-    flex-direction: column;
-    gap: 50px;
+  .footer {
+    margin-top: 50px;
+  }
+
+  .footer-container {
+    width: calc(100% - 40px);
+
+    padding: 50px 0;
+
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+  }
+
+  .footer-brand,
+  .footer-links,
+  .footer-contacto,
+  .footer-mapa {
     text-align: center;
+
+    align-items: center;
   }
 
-  .footer-col {
-    width: 100%;
+  .footer-brand img {
+    width: 120px;
+    margin-bottom: 16px;
   }
 
-  .footer-logo {
-    margin: 0 auto;
+  .footer-brand p {
+    max-width: 100%;
+
+    font-size: 15px;
+
+    line-height: 1.7;
   }
 
-  .footer-socials {
+  .footer-social {
     justify-content: center;
+  }
+
+  .footer h4 {
+    margin-bottom: 16px;
+  }
+
+  .footer-links a,
+  .footer-contacto p {
+    font-size: 15px;
+  }
+
+  .mapa-box {
+    height: 200px;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    padding: 18px;
   }
 
 }

@@ -54,14 +54,36 @@
 /* Mobile */
 @media (max-width: 768px) {
 
+  .marcas {
+    width: calc(100% - 40px);
+
+    margin: 60px auto;
+  }
+
+  .marcas-titulo {
+    text-align: center;
+
+    font-size: 14px;
+
+    margin-bottom: 24px;
+  }
+
   .marcas-track {
-    gap: 20px;
+    gap: 16px;
+
+    animation: scrollMarcas 18s linear infinite;
   }
 
   .marca-item {
-    min-width: 220px;
-    height: 110px;
-    font-size: 42px;
+    min-width: 140px;
+
+    height: 72px;
+
+    border-radius: 16px;
+
+    margin-right: 0;
+
+    font-size: 22px;
   }
 
 }
