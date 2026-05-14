@@ -67,7 +67,7 @@ function Footer() {
 
           <div className="mapa-box">
                 <iframe
-                    src="https://www.google.com/maps?q=Villa%20Ca%C3%B1as%20Santa%20Fe&output=embed"
+                    src="https://maps.app.goo.gl/2uFWYndVcoh3dotP8"
                     width="100%"
                     height="220"
                     style={{ border: 0 }}
