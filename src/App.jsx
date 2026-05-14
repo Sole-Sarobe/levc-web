@@ -1,26 +1,14 @@
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import UltimosIngresos from "./components/UltimosIngresos";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Categorias from "./components/Categorias";
-import Beneficios from "./components/Beneficios";
-import Footer from "./components/Footer";
-import Marcas from "./components/Marcas";
-import Banner from "./components/Banner";
+import Inicio from "./pages/Inicio";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Hero />
-      <UltimosIngresos />
-      <Categorias />
-      <Beneficios />
-      <Marcas />
-      <Banner />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Inicio />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
