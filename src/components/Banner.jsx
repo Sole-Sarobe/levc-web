@@ -1,6 +1,6 @@
 import "./Banner.css";
 
-import local from "../assets/hero-local.jpg";
+import local from "../assets/banner-local.jpg";
 
 function Banner() {
   return (
