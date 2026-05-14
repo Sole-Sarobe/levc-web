@@ -49,14 +49,14 @@ function Footer() {
 
           <p>📍 Villa Cañás, Santa Fe</p>
 
-          <p>📞 +54 3462 000000</p>
+          <p>📞 +54 3462 22-2645</p>
 
-          <p>✉️ info@levc.com.ar</p>
+          <p>✉️ contacto@laele.com.ar</p>
 
           <p>
-            🕒 Lun a Vie 8:30 a 12:30 hs
+            🕒 Lun a Vie 8:00 a 12:00 hs
             <br />
-            15:30 hs a 18:30 hs
+            14:00 hs a 20:00 hs
           </p>
 
         </div>
