@@ -66,8 +66,16 @@ function Footer() {
           <h4>UBICACIÓN</h4>
 
           <div className="mapa-box">
-            MAPA
-          </div>
+                <iframe
+                    src="https://www.google.com/maps?q=Villa%20Ca%C3%B1as%20Santa%20Fe&output=embed"
+                    width="100%"
+                    height="220"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+            </div>
 
         </div>
 
