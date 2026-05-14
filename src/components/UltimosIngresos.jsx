@@ -1,6 +1,6 @@
 import lampara from "../assets/ultimos-ingresos-lamparas.jpeg";
-import spot from "../assets/hero-local.jpg";
-import guantes from "../assets/hero-logistica.jpg";
+import spot from "../assets/ultimos-ingresos-spots.jpg";
+import guantes from "../assets/ultimos-ingresos-guantes.jpg";
 import "./UltimosIngresos.css";
 
 const productos = [
