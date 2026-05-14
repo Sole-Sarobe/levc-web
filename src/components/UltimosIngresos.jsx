@@ -1,4 +1,4 @@
-import lampara from "../assets/ultimos-ingresos-lamparas.jpg";
+import lampara from "../assets/ultimos-ingresos-lamparas.jpeg";
 import spot from "../assets/hero-local.jpg";
 import guantes from "../assets/hero-logistica.jpg";
 import "./UltimosIngresos.css";
