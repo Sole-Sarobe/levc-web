@@ -67,7 +67,7 @@ function Footer() {
 
           <div className="mapa-box">
                 <iframe
-                    src="https://maps.app.goo.gl/2uFWYndVcoh3dotP8"
+                    src="<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.7364660755375!2d-61.609381924039965!3d-33.999302225830434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95c7ef52adc1ab23%3A0x9071ef755553de6e!2sLa%20Electrica!5e0!3m2!1ses-419!2sar!4v1778800156202!5m2!1ses-419!2sar"
                     width="100%"
                     height="220"
                     style={{ border: 0 }}
