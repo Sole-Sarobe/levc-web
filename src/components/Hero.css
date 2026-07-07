@@ -43,6 +43,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  animation: heroContentIn 0.55s ease both;
 }
 
 .hero-content p {
@@ -114,6 +116,18 @@
   background: #2147e8;
 }
 
+@keyframes heroContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-50% + 12px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+}
+
 /* Mobile */
 @media (max-width: 768px) {
 
@@ -147,6 +161,18 @@
     transform: none;
 
     align-items: flex-start;
+  }
+
+  @keyframes heroContentIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .hero-content p {

@@ -1,5 +1,5 @@
 .contacto {
-  padding: 140px 8% 100px;
+  padding: 70px 8% 90px;
 
   min-height: 100vh;
 
@@ -36,7 +36,7 @@
 
   gap: 70px;
 
-  align-items: center;
+  align-items: start;
 }
 
 .contacto-info span {
@@ -54,7 +54,7 @@
 
   line-height: 0.95;
 
-  margin: 22px 0;
+  margin: 0 0 24px;
 
   color: #111;
 }
@@ -67,6 +67,19 @@
   line-height: 1.8;
 
   max-width: 560px;
+}
+
+.contacto-mapa {
+  width: 100%;
+  max-width: 620px;
+  height: 258px;
+  margin-top: 30px;
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow:
+    0 12px 32px rgba(15,23,42,0.12);
+  border: 1px solid rgba(255,255,255,0.7);
+  background: #e5eaf5;
 }
 
 .contacto-form {
@@ -102,6 +115,8 @@
 
   font-size: 16px;
 
+  font-family: inherit;
+
   background: rgba(255,255,255,0.85);
 
   outline: none;
@@ -121,6 +136,25 @@
   min-height: 180px;
 
   resize: none;
+}
+
+.form-status {
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.form-status-ok {
+  color: #116329;
+  background: #e8f8ed;
+  border: 1px solid #bde9c9;
+}
+
+.form-status-error {
+  color: #8a1f1f;
+  background: #ffecec;
+  border: 1px solid #f5b9b9;
 }
 
 .contacto-form button {
@@ -168,7 +202,7 @@
 @media (max-width: 900px) {
 
   .contacto {
-    padding: 120px 6% 80px;
+    padding: 58px 6% 80px;
   }
 
   .contacto-container {
@@ -179,6 +213,8 @@
 
   .contacto-info h1 {
     font-size: 52px;
+
+    margin-bottom: 20px;
   }
 
   .contacto-info p {
@@ -189,6 +225,11 @@
     padding: 30px;
   }
 
+  .contacto-mapa {
+    max-width: 100%;
+    height: 240px;
+  }
+
 }
 
 /* -------------------Mobile--------------------- */
@@ -196,7 +237,7 @@
 @media (max-width: 768px) {
 
   .contacto {
-    padding: 110px 6% 70px;
+    padding: 48px 6% 70px;
   }
 
   .contacto-container {
@@ -213,12 +254,19 @@
     font-size: 48px;
 
     line-height: 1;
+
+    margin-bottom: 18px;
   }
 
   .contacto-info p {
     font-size: 16px;
 
     max-width: 100%;
+  }
+
+  .contacto-mapa {
+    height: 220px;
+    margin-top: 24px;
   }
 
   .contacto-form {

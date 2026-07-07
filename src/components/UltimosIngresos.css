@@ -45,19 +45,25 @@
 .producto-card {
   background: white;
 
-  border-radius: 28px;
+  border-radius: 24px;
 
   overflow: hidden;
 
   position: relative;
 
-  min-height: 500px;
+  min-height: 440px;
 
   transition: 0.4s;
 
   cursor: pointer;
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+
+  display: block;
+
+  color: inherit;
+
+  text-decoration: none;
 }
 
 .producto-card:hover {
@@ -88,9 +94,10 @@
 
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.7),
-    rgba(0,0,0,0.15),
-    rgba(0,0,0,0)
+    rgba(0,0,0,0.84) 0%,
+    rgba(0,0,0,0.56) 30%,
+    rgba(0,0,0,0.1) 62%,
+    rgba(0,0,0,0) 100%
   );
 
   z-index: 1;
@@ -101,56 +108,86 @@
 .producto-info {
   position: absolute;
 
-  bottom: 35px;
-  left: 35px;
+  bottom: 0;
+  left: 0;
 
   z-index: 5;
 
   color: white;
   width: 100%;
+
+  min-height: 190px;
+
+  padding: 30px 34px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: flex-end;
+
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0));
 }
 
 .producto-info h3 {
   font-size: 30px;
 
-  line-height: 1.05;
+  line-height: 1;
 
-  margin-bottom: 18px;
+  margin: 0 0 12px;
 
-  max-width: 240px;
+  max-width: 310px;
+
+  text-transform: uppercase;
+
+  text-wrap: balance;
 }
 
 .producto-info p {
-  font-size: 15px;
+  font-size: 16px;
 
   line-height: 1.5;
 
-  max-width: 240px;
+  max-width: 320px;
 
-  margin-bottom: 22px;
+  margin: 0 0 20px;
 
   color: rgba(255,255,255,0.92);
 }
 
-.producto-info button {
-  background: #355CFF;
+.producto-info span {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: max-content;
+
+  background: #355cff;
 
   border: none;
 
   color: white;
 
-  padding: 14px 24px;
+  min-width: 138px;
 
-  border-radius: 14px;
+  padding: 14px 22px;
+
+  border-radius: 13px;
 
   font-weight: bold;
 
   cursor: pointer;
 
   transition: 0.3s;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0;
 }
 
-.producto-info button:hover {
+.producto-card:hover .producto-info span {
   background: #2147e8;
 }
 
@@ -209,14 +246,16 @@
   }
 
   .producto-info {
-    left: 22px;
-    bottom: 22px;
-    width: calc(100% - 44px);
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 176px;
+    padding: 22px;
   }
 
   .producto-info h3 {
-    font-size: 26px;
-    line-height: 1;
+    font-size: 25px;
+    line-height: 1.05;
     max-width: 260px;
     margin-bottom: 12px;
   }
@@ -225,11 +264,11 @@
     font-size: 14px;
     line-height: 1.4;
     max-width: 260px;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
   }
 
-  .producto-info button {
-    width: 150px;
+  .producto-info span {
+    width: 140px;
     height: 46px;
     padding: 0;
     font-size: 14px;

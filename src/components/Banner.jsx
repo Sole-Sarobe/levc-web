@@ -11,16 +11,14 @@ function Banner() {
         <div className="banner-left">
           <span>MÁS DE</span>
 
-          <h2>20</h2>
+          <h2>35</h2>
 
           <p>AÑOS</p>
         </div>
 
         <div className="banner-text">
           <h3>
-            Acompañando a nuestros clientes
-            con los mejores productos y
-            la mejor atención.
+            Acompañandote a cumplir e iluminar tus proyectos.
           </h3>
 
           <button>CONOCENOS</button>

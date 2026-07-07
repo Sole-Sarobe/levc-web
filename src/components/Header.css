@@ -8,14 +8,146 @@
 
   padding: 0 60px;
 
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
 
   z-index: 1000;
 }
 
 .logo-container img {
-  height: 85px;
+  height: 86px;
+  width: 86px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.logo-container.intro-hidden {
+  opacity: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #0b2f7f;
+  font-weight: 800;
+  line-height: 0.88;
+  white-space: nowrap;
+}
+
+.brand-name {
+  font-size: 30px;
+}
+
+.brand-srl {
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.intro-page-fade {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+
+  background: white;
+
+  animation: introPageFade 2.8s ease forwards;
+}
+
+.intro-brand {
+  position: fixed;
+  top: 0;
+  left: 60px;
+
+  z-index: 2001;
+
+  height: 90px;
+
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  transform-origin: left center;
+
+  pointer-events: none;
+
+  animation: introBrandMove 2.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.intro-brand img {
+  height: 86px;
+  width: 86px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.intro-brand .brand-text {
+  color: #0b2f7f;
+  font-weight: 800;
+  line-height: 0.88;
+  white-space: nowrap;
+}
+
+.intro-brand .brand-name {
+  font-size: 30px;
+}
+
+.intro-brand .brand-srl {
+  font-size: 18px;
+}
+
+@keyframes introPageFade {
+  0% {
+    opacity: 1;
+  }
+
+  34% {
+    opacity: 0.92;
+  }
+
+  82% {
+    opacity: 0.12;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes introBrandMove {
+  0% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2.18);
+  }
+
+  18% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2.18);
+  }
+
+  82% {
+    top: 0;
+    left: 60px;
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    top: 0;
+    left: 60px;
+    transform: translate(0, 0) scale(1);
+  }
 }
 
 /* NAV DESKTOP */
@@ -51,6 +183,66 @@
 
   .logo-container img {
     height: 60px;
+    width: 60px;
+  }
+
+  .logo-container {
+    gap: 0;
+  }
+
+  .brand-name {
+    font-size: 21px;
+  }
+
+  .brand-srl {
+    font-size: 13px;
+  }
+
+  .intro-brand {
+    top: 0;
+    left: 20px;
+
+    height: 80px;
+    gap: 2px;
+  }
+
+  .intro-brand img {
+    height: 60px;
+    width: 60px;
+  }
+
+  .intro-brand .brand-name {
+    font-size: 21px;
+  }
+
+  .intro-brand .brand-srl {
+    font-size: 13px;
+  }
+
+  @keyframes introBrandMove {
+    0% {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.86);
+    }
+
+    18% {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.86);
+    }
+
+    82% {
+      top: 0;
+      left: 20px;
+      transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+      top: 0;
+      left: 20px;
+      transform: translate(0, 0) scale(1);
+    }
   }
 
   .menu-toggle {

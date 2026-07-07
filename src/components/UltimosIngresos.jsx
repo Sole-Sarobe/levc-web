@@ -3,57 +3,61 @@ import spot from "../assets/ultimos-ingresos-spots.jpg";
 import guantes from "../assets/ultimos-ingresos-guantes.jpg";
 import "./UltimosIngresos.css";
 
+const whatsappBase = "https://wa.me/5493462222645";
+
 const productos = [
   {
-    titulo: `LÁMPARAS
-INFRARROJAS`,
-    descripcion:
-      "Óptima emisión de calor para desarrollo saludable.",
+    titulo: "Lamparas infrarrojas",
+    consulta: "lamparas infrarrojas",
+    descripcion: "Optima emision de calor para desarrollo saludable.",
     imagen: lampara,
   },
-
   {
-    titulo: `SPOTS LED
-DE ALTA POTENCIA`,
-    descripcion:
-      "Iluminación profesional para cada necesidad.",
+    titulo: "Spots LED",
+    consulta: "spots LED de alta potencia",
+    descripcion: "Iluminacion profesional para cada necesidad.",
     imagen: spot,
   },
-
   {
-    titulo: `GUANTES
-MOTEADOS`,
-    descripcion:
-      "Máxima protección y agarre para trabajos exigentes.",
+    titulo: "Guantes moteados",
+    consulta: "guantes moteados",
+    descripcion: "Maxima proteccion y agarre para trabajos exigentes.",
     imagen: guantes,
   },
 ];
 
 function UltimosIngresos() {
   return (
-    <section className="ultimos">
+    <section className="ultimos" id="ultimos-ingresos">
       <div className="section-title">
         <span>//</span>
-
-        <h2>ÚLTIMOS INGRESOS</h2>
+        <h2>ULTIMOS INGRESOS</h2>
       </div>
 
       <div className="cards-grid">
-        {productos.map((producto, index) => (
-          <div className="producto-card" key={index}>
+        {productos.map((producto) => {
+          const mensaje = encodeURIComponent(
+            `Hola!! queria consultar por ${producto.consulta}`
+          );
+
+          return (
+          <a
+            className="producto-card"
+            href={`${whatsappBase}?text=${mensaje}`}
+            key={producto.titulo}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={producto.imagen} alt={producto.titulo} />
+
             <div className="producto-info">
-              <h3 style={{ whiteSpace: "pre-line" }}>
-                {producto.titulo}
-              </h3>
-
+              <h3>{producto.titulo}</h3>
               <p>{producto.descripcion}</p>
-
-              <button>VER MÁS</button>
+              <span>Consultar</span>
             </div>
-
-            <img src={producto.imagen} alt="" />
-          </div>
-        ))}
+          </a>
+          );
+        })}
       </div>
     </section>
   );

@@ -1,168 +1,144 @@
 .footer {
-  background: white;
-  margin-top: 60px;
-  border-top: 1px solid #e5e5e5;
+  background: #f8faff;
+  margin-top: 50px;
+  border-top: 1px solid #e3e8f5;
 }
 
 .footer-container {
-  width: 90%;
-  margin: auto;
+  width: min(1180px, calc(100% - 120px));
+  margin: 0 auto;
+}
 
-  padding: 50px 0;
-
+.footer-info {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1.2fr 1.3fr;
-
-  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  min-height: 92px;
 }
 
-.footer-brand img {
-  width: 160px;
-  margin-bottom: 25px;
-}
-
-.footer-brand p {
-  color: #555;
-  line-height: 1.8;
-  margin-bottom: 20px;
-  max-width: 320px;
-}
-
-.footer-social {
-  display: flex;
-  gap: 12px;
-}
-
-.footer-social img {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.footer-social img:hover {
-  transform: scale(1.08);
-}
-
-.footer-links,
-.footer-contacto,
-.footer-mapa {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer h4 {
-  color: #111;
-  margin-bottom: 20px;
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.footer-links a {
-  text-decoration: none;
-  color: #555;
-  margin-bottom: 12px;
-  transition: 0.3s;
-}
-
-.footer-links a:hover {
-  color: #1f46ff;
-}
-
-.footer-contacto p {
-  color: #555;
-  margin-bottom: 14px;
-  line-height: 1.6;
-}
-
-.mapa-box {
-  width: 100%;
-  height: 180px;
-
-  background: #f1f1f1;
-
-  border-radius: 16px;
-
+.footer-item {
+  min-height: 56px;
+  padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 15px;
+  color: #253049;
+  font-size: 16px;
+  line-height: 1.35;
+}
 
-  color: #888;
-  font-weight: 700;
+.footer-item + .footer-item {
+  border-left: 1px solid #dfe5f2;
+}
+
+.footer-item svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  color: #4353ee;
+  stroke-width: 2.25;
 }
 
 .footer-copy {
-  border-top: none;
-
+  border-top: 1px solid #e3e8f5;
+  padding: 11px 0 12px;
   text-align: center;
-
-  padding: 20px;
-
-  font-size: 14px;
-
-  color: #777;
+  color: #6d7487;
+  font-size: 13px;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
+.floating-social {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
 
-  .footer {
-    margin-top: 50px;
-  }
+.floating-social a {
+  width: 62px;
+  height: 62px;
+  display: block;
+  border-radius: 50%;
+  overflow: hidden;
+  filter: drop-shadow(0 8px 14px rgba(15, 23, 42, 0.22));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
 
+.floating-social a:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.28));
+}
+
+.floating-social img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@media (max-width: 900px) {
   .footer-container {
     width: calc(100% - 40px);
+  }
 
-    padding: 50px 0;
+  .footer-info {
+    grid-template-columns: 1fr 1fr;
+    padding: 18px 0;
+    gap: 0;
+  }
 
+  .footer-item {
+    min-height: 62px;
+    padding: 0 18px;
+    justify-content: flex-start;
+  }
+
+  .footer-item + .footer-item {
+    border-left: none;
+  }
+
+  .footer-item:nth-child(even) {
+    border-left: 1px solid #dfe5f2;
+  }
+
+  .floating-social {
+    right: 16px;
+  }
+
+  .floating-social a {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer-info {
     grid-template-columns: 1fr;
-
-    gap: 40px;
+    padding: 16px 0;
   }
 
-  .footer-brand,
-  .footer-links,
-  .footer-contacto,
-  .footer-mapa {
-    text-align: center;
-
-    align-items: center;
-  }
-
-  .footer-brand img {
-    width: 120px;
-    margin-bottom: 16px;
-  }
-
-  .footer-brand p {
-    max-width: 100%;
-
-    font-size: 15px;
-
-    line-height: 1.7;
-  }
-
-  .footer-social {
+  .footer-item {
     justify-content: center;
+    text-align: center;
+    min-height: 48px;
   }
 
-  .footer h4 {
-    margin-bottom: 16px;
+  .footer-item:nth-child(even) {
+    border-left: none;
   }
 
-  .footer-links a,
-  .footer-contacto p {
-    font-size: 15px;
+  .floating-social {
+    right: 12px;
   }
 
-  .mapa-box {
-    height: 200px;
+  .floating-social a {
+    width: 52px;
+    height: 52px;
   }
-
-  .footer-copy {
-    font-size: 13px;
-    padding: 18px;
-  }
-
 }

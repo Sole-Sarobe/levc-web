@@ -2,13 +2,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Inicio from "./pages/Inicio";
 import Productos from "./pages/Productos";
+import Importaciones from "./pages/Importaciones";
 import Herramientas from "./pages/Herramientas";
 import Pinturas from "./pages/Pinturas";
 import Contacto from "./pages/Contacto";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Nuevo">
 
       <Routes>
 
@@ -17,6 +19,16 @@ function App() {
         <Route
           path="/productos"
           element={<Productos />}
+        />
+
+        <Route
+          path="/importaciones"
+          element={<Importaciones />}
+        />
+
+        <Route
+          path="/admin"
+          element={<Admin />}
         />
 
         <Route

@@ -7,7 +7,8 @@ import {
 import "./Hero.css";
 import heroCerdo from "../assets/hero-cerdo.jpg";
 import heroLocal from "../assets/hero-local.jpg";
-import heroLogistica from "../assets/hero-logistica.jpg";
+import heroLogistica from "../assets/hero-logistica-laelevc.png";
+import heroImportadores from "../assets/hero-importadores-laelevc.png";
 
 const slides = [
   {
@@ -44,18 +45,33 @@ ENTREGA`,
       "Atención personalizada y stock permanente.",
       size: "medium",
   },
+
+  {
+    image: heroImportadores,
+    subtitle: "IMPORTACION DIRECTA",
+    title: `SOMOS
+IMPORTADORES`,
+    description:
+      "Traemos productos seleccionados para ofrecer stock, precio y respaldo.",
+      size: "medium",
+  },
 ];
 
 function Hero() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    slides.forEach((slide) => {
+      const image = new Image();
+      image.src = slide.image;
+    });
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 6000);
 
     return () => clearInterval(interval);
-  }, [current]);
+  }, []);
 
   const nextSlide = () => {
     setCurrent((prev) =>
@@ -72,6 +88,7 @@ function Hero() {
   return (
     <section className="hero">
       <img
+        key={slides[current].image}
         src={slides[current].image}
         alt=""
         className="hero-image"
@@ -79,7 +96,7 @@ function Hero() {
 
       <div className="overlay"></div>
 
-      <div className="hero-content">
+      <div className="hero-content" key={current}>
         <p>{slides[current].subtitle}</p>
 
         <h1

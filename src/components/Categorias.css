@@ -33,6 +33,12 @@
   cursor: pointer;
 
   transition: 0.4s;
+
+  display: block;
+
+  color: inherit;
+
+  text-decoration: none;
 }
 
 .categoria:hover {
@@ -106,7 +112,9 @@
   color: rgba(255,255,255,0.92);
 }
 
-.categoria-info button {
+.categoria-boton {
+  display: inline-flex;
+
   background: transparent;
 
   border: 2px solid white;
@@ -124,7 +132,7 @@
   transition: 0.3s;
 }
 
-.categoria-info button:hover {
+.categoria:hover .categoria-boton {
   background: white;
 
   color: black;
@@ -165,7 +173,7 @@
     margin-bottom: 18px;
   }
 
-  .categoria-info button {
+  .categoria-boton {
     padding: 14px 22px;
     font-size: 15px;
   }

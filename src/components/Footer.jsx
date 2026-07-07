@@ -1,90 +1,73 @@
 import "./Footer.css";
 
-import logo from "../assets/logo.png";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import whatsapp from "../assets/icon-whatsapp.png";
 import instagram from "../assets/icon-instagram.png";
 import facebook from "../assets/icon-facebook.png";
 
 function Footer() {
+  const whatsappMessage = encodeURIComponent(
+    "Hola! me gustaria recibir informacion."
+  );
+
   return (
     <footer className="footer">
-
       <div className="footer-container">
-
-        <div className="footer-brand">
-
-          <img src={logo} alt="LEVC" />
-
-          <p>
-            Importamos y distribuimos materiales
-            eléctricos, herramientas y artículos
-            para profesionales, empresas y particulares.
-          </p>
-
-          <div className="footer-social">
-
-            <img src={facebook} alt="" />
-            <img src={instagram} alt="" />
-            <img src={whatsapp} alt="" />
-
+        <div className="footer-info">
+          <div className="footer-item">
+            <MapPin />
+            <span>Villa Cañas, Santa Fe</span>
           </div>
 
+          <div className="footer-item">
+            <Phone />
+            <span>+54 3462 22-2645</span>
+          </div>
+
+          <div className="footer-item">
+            <Mail />
+            <span>contacto@laele.com.ar</span>
+          </div>
+
+          <div className="footer-item">
+            <Clock />
+            <span>
+              Lun a Vie 8:00 a 12:00 hs
+              <br />
+              14:00 hs a 20:00 hs
+            </span>
+          </div>
         </div>
 
-        <div className="footer-links">
-
-          <h4>ENLACES</h4>
-
-          <a href="#">Inicio</a>
-          <a href="#">Productos</a>
-          <a href="#">Herramientas</a>
-          <a href="#">Pinturas</a>
-          <a href="#">Contacto</a>
-
-        </div>
-
-        <div className="footer-contacto">
-
-          <h4>CONTACTO</h4>
-
-          <p>📍 Villa Cañás, Santa Fe</p>
-
-          <p>📞 +54 3462 22-2645</p>
-
-          <p>✉️ contacto@laele.com.ar</p>
-
-          <p>
-            🕒 Lun a Vie 8:00 a 12:00 hs
-            <br />
-            14:00 hs a 20:00 hs
-          </p>
-
-        </div>
-
-        <div className="footer-mapa">
-
-          <h4>UBICACIÓN</h4>
-
-          <div className="mapa-box">
-                <iframe
-                    src="https://www.google.com/maps?q=Av.+51+784,+Villa+Cañás,+Santa+Fe&output=embed"
-                    width="100%"
-                    height="220"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-            </div>
-
-        </div>
-
+        <div className="footer-copy">© 2026 LaEleVC SRL</div>
       </div>
 
-      <div className="footer-copy">
-        © 2026 LEVC Materiales Eléctricos
+      <div className="floating-social" aria-label="Redes sociales">
+        <a
+          href="https://www.facebook.com/laelectrica.devillacanas"
+          aria-label="Facebook"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={facebook} alt="" />
+        </a>
+        <a
+          href="https://www.instagram.com/laelevc/"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={instagram} alt="" />
+        </a>
+        <a
+          href={`https://wa.me/5493462222645?text=${whatsappMessage}`}
+          aria-label="WhatsApp"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={whatsapp} alt="" />
+        </a>
       </div>
-
     </footer>
   );
 }
