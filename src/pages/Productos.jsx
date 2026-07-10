@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-import { supabase } from "../supabase";
+import { listarProductos } from "../api";
 
 import bannerIluminacion from "../assets/banner-productos-iluminacion.jpg";
 import bannerHerramientas from "../assets/banner-productos-herramientas.png";
@@ -151,17 +151,14 @@ function Productos() {
   }, [location.hash, productos.length]);
 
   async function cargarProductos() {
-    const { data, error } = await supabase
-      .from("productos")
-      .select("*")
-      .order("id", { ascending: false });
-
-    if (error) {
+    try {
+      const data = await listarProductos();
+      setProductos(data || []);
+    } catch (error) {
       console.log(error);
+      setProductos([]);
       return;
     }
-
-    setProductos(data || []);
   }
 
   const productosPorCategoria = useMemo(() => {

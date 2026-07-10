@@ -1,415 +1,381 @@
 import { useEffect, useState } from "react";
 
-import { supabase } from "../supabase";
+import {
+  clearAdminToken,
+  eliminarProductoApi,
+  getAdminToken,
+  guardarProducto,
+  listarProductos,
+  loginAdmin,
+  setAdminToken,
+} from "../api";
 
 function Admin() {
+  const [token, setToken] = useState(() => getAdminToken() || "");
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   const [productos, setProductos] = useState([]);
-
   const [nombre, setNombre] = useState("");
   const [categoria, setCategoria] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [imagen, setImagen] = useState(null);
-
-  const [editandoId, setEditandoId] =
-    useState(null);
+  const [editandoId, setEditandoId] = useState(null);
+  const [guardando, setGuardando] = useState(false);
 
   useEffect(() => {
+    if (token) {
+      cargarProductos();
+    }
+  }, [token]);
 
-    cargarProductos();
+  async function ingresar(e) {
+    e.preventDefault();
+    setLoginError("");
 
-  }, []);
+    try {
+      const data = await loginAdmin(usuario, password);
+      setAdminToken(data.token);
+      setToken(data.token);
+      setUsuario("");
+      setPassword("");
+    } catch (error) {
+      setLoginError(error.message);
+    }
+  }
+
+  function salir() {
+    clearAdminToken();
+    setToken("");
+    setProductos([]);
+  }
 
   async function cargarProductos() {
-
-    const { data, error } =
-      await supabase
-        .from("productos")
-        .select("*")
-        .order("id", { ascending: false });
-
-    console.log(data);
-
-    if (error) {
+    try {
+      const data = await listarProductos();
+      setProductos(data);
+    } catch (error) {
       console.log(error);
-      return;
+      alert("No se pudieron cargar los productos");
     }
-
-    setProductos(data);
-
   }
 
   async function subirProducto(e) {
-
     e.preventDefault();
+    setGuardando(true);
 
-    let urlImagen = null;
-
-    // SI HAY IMAGEN NUEVA
-
-    if (imagen) {
-
-      const nombreArchivo =
-        `${Date.now()}-${imagen.name}`;
-
-      const { error: errorImagen } =
-        await supabase.storage
-          .from("productos")
-          .upload(nombreArchivo, imagen);
-
-      if (errorImagen) {
-        console.log(errorImagen);
-        alert("ERROR STORAGE");
-        return;
-      }
-
-      urlImagen =
-        `https://wcimextrjelgwbklqirk.supabase.co/storage/v1/object/public/productos/${nombreArchivo}`;
-    }
-
-    // EDITAR
+    const formData = new FormData();
+    formData.append("action", editandoId ? "update" : "create");
+    formData.append("nombre", nombre);
+    formData.append("categoria", categoria);
+    formData.append("descripcion", descripcion);
 
     if (editandoId) {
-
-      const updateData = {
-        nombre,
-        categoria,
-        descripcion
-      };
-
-      if (urlImagen) {
-        updateData.imagen = urlImagen;
-      }
-
-      console.log("EDITANDO:");
-      console.log(editandoId);
-
-      console.log("DATA:");
-      console.log(updateData);
-
-      const response =
-        await supabase
-          .from("productos")
-          .update(updateData)
-          .eq("id", editandoId)
-          .select();
-
-      console.log("RESPUESTA:");
-      console.log(response);
-
-      if (response.error) {
-        console.log(response.error);
-        alert("ERROR UPDATE");
-        return;
-      }
-
-      alert("Producto actualizado");
-
-    } else {
-
-      // CREAR
-
-      const response =
-        await supabase
-          .from("productos")
-          .insert([
-            {
-              nombre,
-              categoria,
-              descripcion,
-              imagen: urlImagen
-            }
-          ])
-          .select();
-
-      console.log("INSERT:");
-      console.log(response);
-
-      if (response.error) {
-        console.log(response.error);
-        alert("ERROR INSERT");
-        return;
-      }
-
-      alert("Producto cargado");
+      formData.append("id", editandoId);
     }
 
+    if (imagen) {
+      formData.append("imagen", imagen);
+    }
+
+    try {
+      await guardarProducto(formData, token);
+      alert(editandoId ? "Producto actualizado" : "Producto cargado");
+      limpiarFormulario();
+      cargarProductos();
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setGuardando(false);
+    }
+  }
+
+  async function eliminarProducto(id) {
+    const confirmar = confirm("Eliminar producto?");
+
+    if (!confirmar) return;
+
+    try {
+      await eliminarProductoApi(id, token);
+      cargarProductos();
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  function editarProducto(producto) {
+    setEditandoId(producto.id);
+    setNombre(producto.nombre || "");
+    setCategoria(producto.categoria || "");
+    setDescripcion(producto.descripcion || "");
+    setImagen(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function limpiarFormulario() {
     setNombre("");
     setCategoria("");
     setDescripcion("");
     setImagen(null);
-
     setEditandoId(null);
-
-    cargarProductos();
-
   }
 
-  async function eliminarProducto(id) {
+  if (!token) {
+    return (
+      <div style={styles.page}>
+        <form onSubmit={ingresar} style={styles.loginCard}>
+          <h1 style={{ margin: "0 0 8px" }}>Panel administrador</h1>
+          <p style={{ margin: "0 0 28px", color: "#667085" }}>
+            Ingresa para cargar, editar y borrar productos.
+          </p>
 
-    const confirmar =
-      confirm("Eliminar producto?");
+          {loginError && <div style={styles.error}>{loginError}</div>}
 
-    if (!confirmar) return;
+          <input
+            type="text"
+            placeholder="Usuario"
+            value={usuario}
+            onChange={(e) => setUsuario(e.target.value)}
+            style={styles.input}
+            autoComplete="username"
+          />
 
-    const { error } =
-      await supabase
-        .from("productos")
-        .delete()
-        .eq("id", id);
+          <input
+            type="password"
+            placeholder="Contrasena"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={styles.input}
+            autoComplete="current-password"
+          />
 
-    if (error) {
-      console.log(error);
-      return;
-    }
-
-    cargarProductos();
-
-  }
-
-  function editarProducto(producto) {
-
-    setEditandoId(producto.id);
-
-    setNombre(producto.nombre);
-    setCategoria(producto.categoria);
-    setDescripcion(producto.descripcion);
-
+          <button type="submit" style={styles.primaryButton}>
+            Ingresar
+          </button>
+        </form>
+      </div>
+    );
   }
 
   return (
+    <div style={styles.page}>
+      <div style={styles.header}>
+        <h1 style={{ margin: 0 }}>Panel administrador</h1>
+        <button type="button" onClick={salir} style={styles.secondaryButton}>
+          Cerrar sesion
+        </button>
+      </div>
 
-    <div
-      style={{
-        padding: "120px 8%",
-        minHeight: "100vh",
-        background: "#f5f7fb"
-      }}
-    >
-
-      <h1
-        style={{
-          marginBottom: "40px"
-        }}
-      >
-        Panel administrador
-      </h1>
-
-      <form
-        onSubmit={subirProducto}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-          maxWidth: "700px",
-          background: "white",
-          padding: "40px",
-          borderRadius: "30px",
-          marginBottom: "70px"
-        }}
-      >
-
+      <form onSubmit={subirProducto} style={styles.form}>
         <input
           type="text"
           placeholder="Nombre"
           value={nombre}
-          onChange={(e) =>
-            setNombre(e.target.value)
-          }
-          style={{
-            padding: "18px",
-            fontSize: "18px"
-          }}
+          onChange={(e) => setNombre(e.target.value)}
+          style={styles.input}
+          required
         />
 
         <select
           value={categoria}
-          onChange={(e) =>
-            setCategoria(e.target.value)
-          }
-          style={{
-            padding: "18px",
-            fontSize: "18px"
-          }}
+          onChange={(e) => setCategoria(e.target.value)}
+          style={styles.input}
+          required
         >
-
-          <option value="">
-            Seleccionar categoría
-          </option>
-
-          <option value="Iluminación">
-            Iluminación
-          </option>
-
-          <option value="Herramientas">
-            Herramientas
-          </option>
-
-          <option value="Pinturas">
-            Pinturas
-          </option>
-
-          <option value="Agro">
-            Agro
-          </option>
-
+          <option value="">Seleccionar categoria</option>
+          <option value="Iluminacion">Iluminacion</option>
+          <option value="Herramientas">Herramientas</option>
+          <option value="Pinturas">Pinturas</option>
+          <option value="Agro">Agro</option>
         </select>
 
         <textarea
-          placeholder="Descripción"
+          placeholder="Descripcion"
           value={descripcion}
-          onChange={(e) =>
-            setDescripcion(e.target.value)
-          }
-          style={{
-            padding: "18px",
-            fontSize: "18px",
-            minHeight: "140px"
-          }}
+          onChange={(e) => setDescripcion(e.target.value)}
+          style={{ ...styles.input, minHeight: "140px" }}
         />
 
         <input
           type="file"
-          onChange={(e) =>
-            setImagen(e.target.files[0])
-          }
+          accept="image/*"
+          onChange={(e) => setImagen(e.target.files[0])}
         />
 
-        <button
-          type="submit"
-          style={{
-            border: "none",
-            background: "#2954ff",
-            color: "white",
-            padding: "20px",
-            borderRadius: "18px",
-            fontSize: "22px",
-            fontWeight: "700",
-            cursor: "pointer"
-          }}
-        >
-          {editandoId
-            ? "Actualizar producto"
-            : "Guardar producto"}
-        </button>
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <button type="submit" style={styles.primaryButton} disabled={guardando}>
+            {guardando
+              ? "Guardando..."
+              : editandoId
+                ? "Actualizar producto"
+                : "Guardar producto"}
+          </button>
 
+          {editandoId && (
+            <button type="button" onClick={limpiarFormulario} style={styles.secondaryButton}>
+              Cancelar edicion
+            </button>
+          )}
+        </div>
       </form>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "25px"
-        }}
-      >
-
+      <div style={styles.list}>
         {productos.map((producto) => (
-
-          <div
-            key={producto.id}
-            style={{
-              background: "white",
-              borderRadius: "30px",
-              padding: "25px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }}
-          >
-
-            <div
-              style={{
-                display: "flex",
-                gap: "25px",
-                alignItems: "center"
-              }}
-            >
-
-              <img
-                src={producto.imagen}
-                alt={producto.nombre}
-                style={{
-                  width: "150px",
-                  height: "150px",
-                  objectFit: "cover",
-                  borderRadius: "24px"
-                }}
-              />
+          <div key={producto.id} style={styles.productRow}>
+            <div style={styles.productInfo}>
+              {producto.imagen ? (
+                <img src={producto.imagen} alt={producto.nombre} style={styles.productImage} />
+              ) : (
+                <div style={styles.emptyImage}></div>
+              )}
 
               <div>
-
-                <span
-                  style={{
-                    color: "#2954ff",
-                    fontWeight: "700"
-                  }}
-                >
-                  {producto.categoria}
-                </span>
-
-                <h2>
-                  {producto.nombre}
-                </h2>
-
-                <p>
-                  {producto.descripcion}
-                </p>
-
+                <span style={styles.category}>{producto.categoria}</span>
+                <h2 style={{ margin: "8px 0" }}>{producto.nombre}</h2>
+                <p style={{ margin: 0, color: "#4b5563" }}>{producto.descripcion}</p>
               </div>
-
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                gap: "12px"
-              }}
-            >
-
-              <button
-                onClick={() =>
-                  editarProducto(producto)
-                }
-                style={{
-                  border: "none",
-                  background: "#2954ff",
-                  color: "white",
-                  padding: "12px 18px",
-                  borderRadius: "12px",
-                  cursor: "pointer"
-                }}
-              >
+            <div style={styles.actions}>
+              <button type="button" onClick={() => editarProducto(producto)} style={styles.smallPrimary}>
                 Editar
               </button>
 
-              <button
-                onClick={() =>
-                  eliminarProducto(producto.id)
-                }
-                style={{
-                  border: "none",
-                  background: "#ff3d3d",
-                  color: "white",
-                  padding: "12px 18px",
-                  borderRadius: "12px",
-                  cursor: "pointer"
-                }}
-              >
+              <button type="button" onClick={() => eliminarProducto(producto.id)} style={styles.danger}>
                 Eliminar
               </button>
-
             </div>
-
           </div>
-
         ))}
-
       </div>
-
     </div>
-
   );
-
 }
+
+const styles = {
+  page: {
+    padding: "120px 8%",
+    minHeight: "100vh",
+    background: "#f5f7fb",
+  },
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "20px",
+    marginBottom: "40px",
+  },
+  loginCard: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "18px",
+    maxWidth: "460px",
+    margin: "0 auto",
+    background: "white",
+    padding: "40px",
+    borderRadius: "30px",
+    boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+    maxWidth: "720px",
+    background: "white",
+    padding: "40px",
+    borderRadius: "30px",
+    marginBottom: "70px",
+  },
+  input: {
+    width: "100%",
+    padding: "18px",
+    fontSize: "18px",
+    border: "1px solid #dbe1f0",
+    borderRadius: "16px",
+    fontFamily: "inherit",
+  },
+  primaryButton: {
+    border: "none",
+    background: "#2954ff",
+    color: "white",
+    padding: "18px 24px",
+    borderRadius: "18px",
+    fontSize: "18px",
+    fontWeight: "700",
+    cursor: "pointer",
+  },
+  secondaryButton: {
+    border: "1px solid #dbe1f0",
+    background: "white",
+    color: "#1f2937",
+    padding: "14px 18px",
+    borderRadius: "14px",
+    fontWeight: "700",
+    cursor: "pointer",
+  },
+  error: {
+    padding: "12px 14px",
+    borderRadius: "12px",
+    color: "#8a1f1f",
+    background: "#ffecec",
+    border: "1px solid #f5b9b9",
+  },
+  list: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "25px",
+  },
+  productRow: {
+    background: "white",
+    borderRadius: "30px",
+    padding: "25px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "24px",
+  },
+  productInfo: {
+    display: "flex",
+    gap: "25px",
+    alignItems: "center",
+  },
+  productImage: {
+    width: "150px",
+    height: "150px",
+    objectFit: "cover",
+    borderRadius: "24px",
+  },
+  emptyImage: {
+    width: "150px",
+    height: "150px",
+    borderRadius: "24px",
+    background: "#eef2ff",
+  },
+  category: {
+    color: "#2954ff",
+    fontWeight: "700",
+  },
+  actions: {
+    display: "flex",
+    gap: "12px",
+  },
+  smallPrimary: {
+    border: "none",
+    background: "#2954ff",
+    color: "white",
+    padding: "12px 18px",
+    borderRadius: "12px",
+    cursor: "pointer",
+  },
+  danger: {
+    border: "none",
+    background: "#ff3d3d",
+    color: "white",
+    padding: "12px 18px",
+    borderRadius: "12px",
+    cursor: "pointer",
+  },
+};
 
 export default Admin;

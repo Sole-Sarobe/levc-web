@@ -1,0 +1,37 @@
+﻿[
+    {
+        "id":  8,
+        "nombre":  "LAMPARA HALOGENAINFRARROJA 250W E27 220V (INF250W)",
+        "categoria":  "Agro",
+        "descripcion":  "LAMPARA HALOGENAINFRARROJA 250W E27 220V (INF250W)\n\nUso en Criadero y granjas\nAplicación de calor para fines terapéuticos\nProcesos de calentamiento y secado\nApta uso Dimmer  ",
+        "imagen":  "uploads/productos/producto-8.jpeg"
+    },
+    {
+        "id":  7,
+        "nombre":  "LAMPARA HALOGENAINFRARROJA 150W E27 220V (INF150W) ",
+        "categoria":  "Agro",
+        "descripcion":  "LAMPARA HALOGENAINFRARROJA 150W E27 220V (INF150W)\n\nUso en Criadero y granjas\nAplicación de calor para fines terapéuticos\nProcesos de calentamiento y secado\nApta uso Dimmer  ",
+        "imagen":  "uploads/productos/producto-7.jpeg"
+    },
+    {
+        "id":  5,
+        "nombre":  "Lamparas Infrarojas 250W",
+        "categoria":  "Iluminación",
+        "descripcion":  "250W",
+        "imagen":  "uploads/productos/producto-5.jpeg"
+    },
+    {
+        "id":  4,
+        "nombre":  "Guantes moteados (HM-XG)",
+        "categoria":  "Herramientas",
+        "descripcion":  "Guante moteado calidad estándar para usos multiples tipos de trabajos ",
+        "imagen":  "uploads/productos/producto-4.jpg"
+    },
+    {
+        "id":  3,
+        "nombre":  "Lamparas infrarrojas",
+        "categoria":  "Iluminación",
+        "descripcion":  "Para criaderos de cerdo",
+        "imagen":  "uploads/productos/producto-3.jpeg"
+    }
+]

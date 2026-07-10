@@ -1,9 +1,10 @@
 Options -MultiViews
 
 RewriteEngine On
-RewriteBase /Nuevo/
 
+RewriteRule ^api/ - [L]
 RewriteRule ^mail/ - [L]
+RewriteRule ^uploads/ - [L]
 RewriteRule \.php$ - [L]
 
 RewriteCond %{REQUEST_FILENAME} -f [OR]

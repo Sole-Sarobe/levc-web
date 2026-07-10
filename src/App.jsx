@@ -8,9 +8,14 @@ import Pinturas from "./pages/Pinturas";
 import Contacto from "./pages/Contacto";
 import Admin from "./pages/Admin";
 
+const basename =
+  import.meta.env.BASE_URL === "/"
+    ? "/"
+    : import.meta.env.BASE_URL.replace(/\/$/, "");
+
 function App() {
   return (
-    <BrowserRouter basename="/Nuevo">
+    <BrowserRouter basename={basename}>
 
       <Routes>
 
