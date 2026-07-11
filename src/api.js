@@ -43,6 +43,8 @@ export async function listarProductos() {
 }
 
 export async function guardarProducto(formData, token) {
+  formData.append("token", token);
+
   const response = await fetch(`${API_URL}/productos.php`, {
     method: "POST",
     headers: {
@@ -58,6 +60,7 @@ export async function eliminarProductoApi(id, token) {
   const formData = new FormData();
   formData.append("action", "delete");
   formData.append("id", id);
+  formData.append("token", token);
 
   const response = await fetch(`${API_URL}/productos.php`, {
     method: "POST",

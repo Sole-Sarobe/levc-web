@@ -61,7 +61,7 @@ function require_admin()
         $header = $headers["Authorization"] ?? $headers["authorization"] ?? "";
     }
 
-    $token = preg_replace("/^Bearer\s+/i", "", $header);
+    $token = $_POST["token"] ?? preg_replace("/^Bearer\s+/i", "", $header);
 
     if (!verify_admin_token($token)) {
         json_response(["ok" => false, "error" => "No autorizado"], 401);

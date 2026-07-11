@@ -25,15 +25,33 @@ $pdo->exec("
 
 $importados = 0;
 $seedPath = __DIR__ . "/seed-productos.json";
-$count = (int) $pdo->query("SELECT COUNT(*) FROM productos")->fetchColumn();
+$force = ($_GET["force"] ?? "") === "1";
+$countBefore = (int) $pdo->query("SELECT COUNT(*) FROM productos")->fetchColumn();
+$seedExists = is_file($seedPath);
+$seedItems = 0;
+$seedError = "";
 
-if ($count === 0 && is_file($seedPath)) {
-    $productos = json_decode(file_get_contents($seedPath), true);
+if (($countBefore === 0 || $force) && $seedExists) {
+    $seedContent = file_get_contents($seedPath);
+    $seedContent = preg_replace('/^\xEF\xBB\xBF/', '', $seedContent);
+    $productos = json_decode($seedContent, true);
+    $seedError = json_last_error_msg();
 
     if (is_array($productos)) {
+        $seedItems = count($productos);
+
+        if ($force) {
+            $pdo->exec("TRUNCATE TABLE productos");
+        }
+
         $stmt = $pdo->prepare("
             INSERT INTO productos (id, nombre, categoria, descripcion, imagen)
             VALUES (:id, :nombre, :categoria, :descripcion, :imagen)
+            ON DUPLICATE KEY UPDATE
+                nombre = VALUES(nombre),
+                categoria = VALUES(categoria),
+                descripcion = VALUES(descripcion),
+                imagen = VALUES(imagen)
         ");
 
         foreach ($productos as $producto) {
@@ -51,8 +69,16 @@ if ($count === 0 && is_file($seedPath)) {
     }
 }
 
+$countAfter = (int) $pdo->query("SELECT COUNT(*) FROM productos")->fetchColumn();
+
 json_response([
     "ok" => true,
     "message" => "Base preparada",
     "importados" => $importados,
+    "productos_antes" => $countBefore,
+    "productos_despues" => $countAfter,
+    "seed_encontrado" => $seedExists,
+    "seed_items" => $seedItems,
+    "seed_error" => $seedError,
+    "force" => $force,
 ]);
